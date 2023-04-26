@@ -1,0 +1,491 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "My API"
+    },
+    "host": "networkintelapidemo.analytics-hub.com",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "State"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/api/getNPIType": {
+        "get": {
+          "tags": [
+            "NPI Type"],
+          "description": "",
+          "produces": [
+            "application/json"
+          ],          
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      },
+      "/api/getState": {
+        "get": {
+          "tags": [
+            "State"],
+          "description": "",
+          "produces": [
+            "application/json"
+          ],          
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      },
+      "/api/getCounty/{state}": {
+        "get": {
+          "tags": [
+            "County"
+          ],
+          "description": "Endpoint to get county",
+          "example":"",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "state",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      },
+      "/api/getZipcode/{state}/{county}": {
+        "get": {
+          "tags": [
+            "Zipcode"
+          ],
+          "description": "Endpoint to get the zipcode",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "state",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "county",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/getSpecialtyGroup/{npitype}": {
+        "get": {
+          "tags": [
+            "SpecialtyGroup"
+          ],
+          "description": "Endpoint to get the specialty group.",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "npitype",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/NPISearch": {
+        "post": {
+          "tags": [
+            "NPI Search with Soring and Pagination"
+          ],
+          "description": "Endpoint to get Search results",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "obj",
+            "in": "body",
+            "example":{"npi":"","specialtygroup":"","firstname":"","lastname":"","orgname":"","geography":"","npitype":"PCP","state":"UT","county":"Beaver","zipcode":"84713","pagenumber":1,"rows":10,"orderby":""},
+            "description": "Json Object",
+            "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/NPISearchDownload": {
+        "post": {
+          "tags": [
+            "NPI Search Download All Results"
+          ],
+          "description": "Endpoint to get Search results",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "obj",
+            "in": "body",
+            "example":{"npi":"","specialtygroup":"","firstname":"","lastname":"","orgname":"","geography":"","npitype":"PCP","state":"UT","county":"Beaver","zipcode":"84713","pagenumber":"","rows":"","orderby":""},
+         
+            "description": "Json Object",
+            "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/NPISearchLevel": {
+        "post": {
+          "tags": [
+            "NPI Search Drilldown"
+          ],
+          "description": "Endpoint to get grilldown Search results",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "obj",
+            "in": "body",
+            "example": {"npi":"1972747269","npitype":"PCP","specialtyname":"Nurse Practitioner","specialtygroup":"","firstname":"","lastname":"","orgname":"","state":"UT","county":"Beaver","zipcode":"84713","geography":"","pagenumber":"","rows":"","orderby":""},
+            "description": "Json Object",
+            "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/saveNPISearchView": {
+        "post": {
+          "tags": [
+            "save view"
+          ],
+          "description": "Endpoint to save user view",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "obj",
+              "example":{"npi":"","npitype":"PCP","specialtygroup":"","firstname":"","lastname":"","orgname":"","state":"UT","county":"Beaver","zipcode":"","geography":"30","userid":"388faf49-27c1-4d45-b0cb-cfe0465956df","isdefault":0,"viewname":"SaveDefault"},
+            "in": "body",
+            "description": "Json Object",
+            "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/updateNPISearchView": {
+        "post": {
+          "tags": [
+            "update view"
+          ],
+          "description": "Endpoint to update existing view",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "obj",
+            "in": "body",
+            "description": "Json Object",
+            "example":{"npi":"","npitype":"PCP","specialtygroup":"","firstname":"","lastname":"","orgname":"","state":"UT","county":"Box Elder","zipcode":"","geography":"10","userid":"388faf49-27c1-4d45-b0cb-cfe0465956df","isdefault":0,"viewid":11},
+            "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/openNPISearchView/{viewid}": {
+        "get": {
+          "tags": [
+            "Open"
+          ],
+          "description": "Endpoint to open selected view",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "viewid",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      } ,
+      "/api/deleteNPISearchView/{viewid}": {
+        "delete": {
+          "tags": [
+            "Delete"
+          ],
+          "description": "Endpoint to delete selected view",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "viewid",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/getNPISearchViews/{userid}": {
+        "get": {
+          "tags": [
+            "Get"
+          ],
+          "description": "Endpoint to get user based views",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "userid",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      } ,
+      "/api/getNPISearchOriginalView/{clientid}": {
+        "get": {
+          "tags": [
+            "Get"
+          ],
+          "description": "Endpoint to get original view based on client",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "client",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/getuser/{userid}": {
+        "get": {
+          "tags": [
+            "Get"
+          ],
+          "description": "Endpoint to get user details",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "userid",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+      ,
+      "/api/defaultNPISearchView/{viewid}/{userid}/{isdefault}": {
+        "patch": {
+          "tags": [
+            "Make it Default"
+          ],
+          "description": "Endpoint to make it default view",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "viewid",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "userid",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "isdefault",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        }
+      }
+    }
+   
+  }
+  
